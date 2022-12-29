@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import '../../core/routes/get_pages.dart';
 import '../../core/routes/routes_manager.dart';
 import '../../core/theme/theme_manager.dart';
 import '../../database/db_controller.dart';
+import 'firebase_options.dart';
 import 'localization/app_translations.dart';
 import 'screens/app/unknown_screen.dart';
 
@@ -13,6 +15,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DbController().initDatabase();
   await SharedPrefController().initPreferences();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

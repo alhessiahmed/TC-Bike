@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "107912571935",
+    "project_id": "tcbick-c1361",
+    "storage_bucket": "tcbick-c1361.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107912571935:android:02902d12d7539e5301392a",
+        "android_client_info": {
+          "package_name": "com.bikes.tcbike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107912571935-i144j7ngkp2jipj47tuh0inmipqcvblq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bikes.tcbike",
+            "certificate_hash": "c6fb6d530313d1bccd890dc8b1bdc3bf5e295ef4"
+          }
+        },
+        {
+          "client_id": "107912571935-r9kjgb1ss0vlbdppusb5a5tp2bgei869.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL2WP914P8t_H2dzWZzBdNIpXo2f5y0Gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107912571935-r9kjgb1ss0vlbdppusb5a5tp2bgei869.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "107912571935-eiaptckeuibmi991ih27v1c59j5ep2u7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bikes.tcbike"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

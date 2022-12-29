@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tcbike/getx/bindings/app/category_binding.dart';
+import 'package:tcbike/getx/bindings/app/contact_us_binding.dart';
 import 'package:tcbike/getx/bindings/app/favorite_binding.dart';
 import 'package:tcbike/getx/bindings/app/payment_binding.dart';
 import 'package:tcbike/getx/bindings/app/product_details_binding.dart';
@@ -125,6 +126,7 @@ final List<GetPage<dynamic>> getPages = [
   GetPage(
     name: RoutesManager.contactUsScreen,
     page: () => const ContactUsScreen(),
+    binding: ContactUsBinding(),
   ),
   GetPage(
     name: RoutesManager.supportCenterScreen,

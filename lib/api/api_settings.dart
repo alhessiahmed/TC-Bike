@@ -30,7 +30,9 @@ class ApiSettings {
   // Profile
   static const String updateProfile = '$_baseUrl/profile/updateProfile';
   static const String changePassword = '$_baseUrl/profile/changePassword';
+  static const String getNotifications = '$_baseUrl/profile/getNotifications';
 
   // About
   static const String about = '$_baseUrl/about';
+  static const String contactUs = '$_baseUrl/contactUs';
 }
