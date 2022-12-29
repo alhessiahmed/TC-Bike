@@ -7,7 +7,32 @@ import 'package:tcbike/model/category.dart';
 import 'package:tcbike/model/product.dart';
 import 'package:tcbike/model/product_details.dart';
 
+import '../../model/api_notification.dart';
+
 class ContentApiController with ApiHelper {
+  Future<List<ApiNotification>> readNotifications() async {
+    List<ApiNotification> notifications = [];
+    Uri uri = Uri.parse(ApiSettings.getNotifications);
+    final response = await http.get(
+      uri,
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      final dataList = jsonResponse['data'] as List;
+      for (var element in dataList) {
+        ApiNotification not = ApiNotification();
+        not.id = element['id'];
+        not.time = element['time'];
+        not.body = element['body'];
+        not.data = element['data'];
+        not.title = element['title'];
+        notifications.add(not);
+      }
+    }
+    return notifications;
+  }
+
   Future<List<Category>> readCategories() async {
     List<Category> categories = [];
     Uri uri = Uri.parse(ApiSettings.categories);

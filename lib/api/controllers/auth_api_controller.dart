@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:tcbike/api/api_helper.dart';
 import 'package:tcbike/api/api_settings.dart';
@@ -14,7 +15,8 @@ class AuthApiController with ApiHelper {
     required String password,
   }) async {
     Uri uri = Uri.parse(ApiSettings.register);
-    log('uri: $uri');
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    // log('uri: $uri');
     var response = await http.post(
       uri,
       body: {
@@ -22,6 +24,7 @@ class AuthApiController with ApiHelper {
         'phone': phone,
         'password': password,
         'password_confirmation': password,
+        'fcm': fcmToken,
       },
       headers: languageHeaders,
     );
@@ -42,11 +45,13 @@ class AuthApiController with ApiHelper {
     required String password,
   }) async {
     Uri uri = Uri.parse(ApiSettings.login);
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
     var response = await http.post(
       uri,
       body: {
         'phone': phone,
         'password': password,
+        'fcm': fcmToken,
       },
       headers: languageHeaders,
     );
@@ -161,6 +166,7 @@ class AuthApiController with ApiHelper {
 
   //   if (googleUser != null) {
   //     Uri uri = Uri.parse(ApiSettings.googleLogin);
+  //     String? fcmToken = await FirebaseMessaging.instance.getToken();
   //     // log('000');
   //     final response = await http.post(
   //       uri,
@@ -170,6 +176,7 @@ class AuthApiController with ApiHelper {
   //         'name': googleUser.displayName,
   //         'email': googleUser.email,
   //         'avatar': googleUser.photoUrl.toString(),
+  //         'fcm': fcmToken,
   //       },
   //     );
   //     if (response.statusCode == 200 ||

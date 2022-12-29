@@ -1,10 +1,35 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tcbike/api/api_settings.dart';
-
+import 'package:tcbike/model/api_response.dart';
 import '../api_helper.dart';
 
 class AboutApiController with ApiHelper {
+  Future<ApiResponse> contactUs({
+    required String name,
+    required String email,
+    required String phone,
+    required String message,
+  }) async {
+    Uri uri = Uri.parse(ApiSettings.contactUs);
+    final response = await http.post(
+      uri,
+      headers: headers,
+      body: {
+        'name': name,
+        'email': email,
+        'phone': phone,
+        'message': message,
+      },
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      return ApiResponse(
+          message: jsonResponse['message'], success: jsonResponse['success']);
+    }
+    return failedResponse;
+  }
+
   Future<AboutData?> readAboutData() async {
     AboutData data = AboutData();
     Uri uri = Uri.parse(ApiSettings.about);
