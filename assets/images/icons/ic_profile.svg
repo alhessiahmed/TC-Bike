@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17" height="21" viewBox="0 0 17 21">
+  <g id="Profile" transform="translate(1 1)">
+    <path id="Stroke_1" data-name="Stroke 1" d="M7.5,0C3.455,0,0,.585,0,2.927S3.433,5.874,7.5,5.874c4.046,0,7.5-.586,7.5-2.927S11.568,0,7.5,0Z" transform="translate(0 13.126)" fill="none" stroke="#9ca3af" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Stroke_3" data-name="Stroke 3" d="M4.926,9.191A4.769,4.769,0,0,0,9.851,4.6,4.769,4.769,0,0,0,4.926,0,4.769,4.769,0,0,0,0,4.6a4.751,4.751,0,0,0,4.892,4.6Z" transform="translate(2.574)" fill="none" stroke="#9ca3af" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

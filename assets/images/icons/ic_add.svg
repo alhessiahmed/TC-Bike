@@ -1,0 +1,7 @@
+<svg id="Group_48" data-name="Group 48" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="Rectangle_50" data-name="Rectangle 50" fill="none" stroke="#03b0f5" stroke-width="1">
+    <rect width="20" height="20" rx="10" stroke="none"/>
+    <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" fill="none"/>
+  </g>
+  <path id="add" d="M.747,3.436h2.54a.149.149,0,0,0,.149-.149V.747a.747.747,0,1,1,1.494,0v2.54a.149.149,0,0,0,.149.149h2.54a.747.747,0,1,1,0,1.494H5.079a.149.149,0,0,0-.149.149v2.54a.747.747,0,0,1-1.494,0V5.079a.149.149,0,0,0-.149-.149H.747a.747.747,0,1,1,0-1.494Zm0,0" transform="translate(5.689 5.506)" fill="#03b0f5"/>
+</svg>
