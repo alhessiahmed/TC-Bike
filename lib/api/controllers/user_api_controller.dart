@@ -26,7 +26,7 @@ class UserApiController with ApiHelper {
         SharedPrefController().getByKey(key: UserInfo.phone.name);
     // request.fields['_method'] = 'put';
     var response = await request.send();
-    print('---------------------${response.statusCode}---------------------');
+    // print('---------------------${response.statusCode}---------------------');
     if (response.statusCode == 200 ||
         response.statusCode == 400 ||
         response.statusCode == 401 ||

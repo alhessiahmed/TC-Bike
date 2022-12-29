@@ -21,10 +21,10 @@ class DbController {
       path,
       version: 1,
       onOpen: (Database database) {
-        print('db opened');
+        // print('db opened');
       },
       onCreate: (Database database, int version) async {
-        print('db created');
+        // print('db created');
         await database.execute('CREATE TABLE cart ('
             'id INTEGER PRIMARY KEY AUTOINCREMENT,'
             'name TEXT NOT NULL,'
@@ -38,10 +38,10 @@ class DbController {
             ')');
       },
       onUpgrade: (Database db, int oldVersion, int newVersion) async {
-        print('db upgraded');
+        // print('db upgraded');
       },
       onDowngrade: (Database db, int oldVersion, int newVersion) {
-        print('db downgraded');
+        // print('db downgraded');
       },
     );
   }

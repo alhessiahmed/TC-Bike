@@ -1,12 +1,12 @@
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+// import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:tcbike/core/utils/show_snackbar.dart';
 import 'package:tcbike/pref/shared_pref_controller.dart';
-import '../../api/controllers/auth_api_controller.dart';
+// import '../../api/controllers/auth_api_controller.dart';
 import '../../core/constants/constants_manager.dart';
 import '../../core/constants/colors_manager.dart';
 import '../../core/constants/images_manager.dart';

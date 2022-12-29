@@ -33,7 +33,7 @@ class CartDbController implements DbOperations<Cart> {
         SharedPrefController().getByKey<int>(key: UserInfo.id.name),
       ],
     );
-    print(numberOfUpdatedRows);
+    // print(numberOfUpdatedRows);
     return numberOfUpdatedRows == 1;
   }
 
