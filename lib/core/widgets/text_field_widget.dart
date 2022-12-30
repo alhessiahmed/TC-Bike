@@ -85,7 +85,6 @@ class TextFieldWidget extends StatelessWidget {
             counterText: counterText == null ? counterText : '',
             counterStyle: TextStyle(color: counterColor),
 
-            // contentPadding:
             //     EdgeInsets.symmetric(horizontal: 30.w, vertical: 35.h),
             hintText: hintText,
             hintStyle: TextStyle(
@@ -102,14 +101,15 @@ class TextFieldWidget extends StatelessWidget {
                   )
                 : isPhone
                     ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
                             width: 2,
                             height: 24.h,
                             color: ColorsManager.primary,
-                            margin: EdgeInsets.symmetric(horizontal: 10),
+                            // margin: EdgeInsets.symmetric(horizontal: 10.w),
                           ),
-                          Text('972'),
+                          const Text('972'),
                         ],
                       )
                     : suffixIcon,

@@ -28,6 +28,7 @@ class ContactUsScreen extends GetView<ContactController> {
             TextFieldWidget(
               label: 'phone_number'.tr,
               hintText: 'phone_number'.tr,
+              isPhone: true,
               controller: controller.phoneController,
             ),
             SizedBox(height: 16.h),
