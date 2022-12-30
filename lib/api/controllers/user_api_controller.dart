@@ -37,7 +37,9 @@ class UserApiController with ApiHelper {
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['success'],
-        object: jsonResponse['data']['icon_url'],
+        object: response.statusCode == 200
+            ? jsonResponse['data']['icon_url']
+            : null,
       );
     }
     return failedResponse;

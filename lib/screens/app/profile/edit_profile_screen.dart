@@ -34,7 +34,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   children: [
                     CircleAvatar(
                       radius: 58.r,
-                      backgroundColor: ColorsManager.secondary,
+                      backgroundColor: ColorsManager.disabled,
                       foregroundColor: ColorsManager.white,
                       backgroundImage: controller.imageIsUpdated
                           ? FileImage(
@@ -126,13 +126,23 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   )),
               SizedBox(height: 16.h),
               TextFieldWidget(
-                label: 'phone_number'.tr,
-                hintText: 'phone_number'.tr,
+                label: SharedPrefController().provider == 'phone'
+                    ? 'phone_number'.tr
+                    : 'email'.tr,
+                hintText: SharedPrefController().provider == 'phone'
+                    ? 'phone_number'.tr
+                    : 'email'.tr,
                 readOnly: true,
-                prefixIcon: SvgPicture.asset(
-                  ImagesManager.call,
-                  color: ColorsManager.primary,
-                ),
+                prefixIcon: SharedPrefController().provider == 'phone'
+                    ? SvgPicture.asset(
+                        ImagesManager.call,
+                        color: ColorsManager.primary,
+                      )
+                    : Icon(
+                        Icons.mail_outline_rounded,
+                        size: 22.r,
+                        color: ColorsManager.primary,
+                      ),
                 controller: controller.phoneController,
                 // suffixIcon: Center(
                 //   child: InkWell(
@@ -144,30 +154,56 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 //   ),
                 // ),
               ),
+
+              // TextFieldWidget(
+              //   label: 'phone_number'.tr,
+              //   hintText: 'phone_number'.tr,
+              //   readOnly: true,
+              //   prefixIcon: SvgPicture.asset(
+              //     ImagesManager.call,
+              //     color: ColorsManager.primary,
+              //   ),
+              //   controller: controller.phoneController,
+              //   // suffixIcon: Center(
+              //   //   child: InkWell(
+              //   //     onTap: () {},
+              //   //     child: const Text(
+              //   //       'تغيير',
+              //   //       style: TextStyle(color: ColorsManager.secondary),
+              //   //     ),
+              //   //   ),
+              //   // ),
+              // ),
               SizedBox(height: 16.h),
-              Obx(
-                () => TextFieldWidget(
-                  label: 'password'.tr,
-                  hintText: 'password'.tr,
-                  readOnly: true,
-                  suffixIcon: Center(
-                    child: InkWell(
-                      onTap: () {
-                        Get.toNamed(RoutesManager.changePasswordScreen);
-                      },
-                      child: const Text(
-                        'تغيير',
-                        style: TextStyle(color: ColorsManager.secondary),
+              Visibility(
+                visible: SharedPrefController().provider == 'phone',
+                maintainSize: true,
+                maintainState: true,
+                maintainAnimation: true,
+                child: Obx(
+                  () => TextFieldWidget(
+                    label: 'password'.tr,
+                    hintText: 'password'.tr,
+                    readOnly: true,
+                    suffixIcon: Center(
+                      child: InkWell(
+                        onTap: () {
+                          Get.toNamed(RoutesManager.changePasswordScreen);
+                        },
+                        child: const Text(
+                          'تغيير',
+                          style: TextStyle(color: ColorsManager.secondary),
+                        ),
                       ),
                     ),
+                    prefixIcon: SvgPicture.asset(
+                      ImagesManager.lock,
+                      color: ColorsManager.primary,
+                    ),
+                    obscureText: !controller.passwordVisible.value,
+                    controller: controller.passwordController,
+                    // isPassword: true,
                   ),
-                  prefixIcon: SvgPicture.asset(
-                    ImagesManager.lock,
-                    color: ColorsManager.primary,
-                  ),
-                  obscureText: !controller.passwordVisible.value,
-                  controller: controller.passwordController,
-                  // isPassword: true,
                 ),
               ),
               // SizedBox(height: 104.h),

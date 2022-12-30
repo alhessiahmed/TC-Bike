@@ -12,6 +12,7 @@ class SignUpController extends GetxController {
   final passwordVisible = false.obs;
   final agreeConditions = false.obs;
   final isLoading = false.obs;
+  final isIgnoring = false.obs;
 
   Future<ApiResponse> signUp() async {
     return await AuthApiController().register(

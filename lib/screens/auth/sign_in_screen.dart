@@ -1,12 +1,12 @@
-// import 'dart:developer';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-// import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:tcbike/core/utils/show_snackbar.dart';
 import 'package:tcbike/pref/shared_pref_controller.dart';
-// import '../../api/controllers/auth_api_controller.dart';
+import '../../api/controllers/auth_api_controller.dart';
 import '../../core/constants/constants_manager.dart';
 import '../../core/constants/colors_manager.dart';
 import '../../core/constants/images_manager.dart';
@@ -86,7 +86,7 @@ class SignInScreen extends GetView<SignInController> {
                     controller: controller.phoneController,
                     isPhone: true,
                     counterColor:
-                        controller.phoneController.value.text.length == 12
+                        controller.phoneController.value.text.length == 9
                             ? ColorsManager.primary
                             : null,
                     counterText:
@@ -206,26 +206,26 @@ class SignInScreen extends GetView<SignInController> {
   Future<void> _performLoginWithGoogle() async {
     // GoogleSignIn().disconnect();
 
-    // log('message');
-    // controller.isLoading(true);
-    // final response = await AuthApiController().signInWithGoogle();
-    // controller.isLoading(false);
-    // log('message2');
-    // log('response: ${response?.message} ${response?.success}');
-    // if (response != null) {
-    //   log(response.message);
-    //   showSnackbar(
-    //     message: response.message,
-    //     success: response.success,
-    //   );
-    //   if (!(await InternetConnectionChecker().hasConnection)) {
-    //     controller.isIgnoring(true);
-    //     Future.delayed(const Duration(seconds: 3))
-    //         .then((value) => controller.isIgnoring(false));
-    //   }
-    //   if (response.success) {
-    //     Get.offAllNamed(RoutesManager.homeScreen);
-    //   }
-    // } // l
+    log('message');
+    controller.isLoading(true);
+    final response = await AuthApiController().signInWithGoogle();
+    controller.isLoading(false);
+    log('message2');
+    log('response: ${response?.message} ${response?.success}');
+    if (response != null) {
+      log(response.message);
+      showSnackbar(
+        message: response.message,
+        success: response.success,
+      );
+      if (!(await InternetConnectionChecker().hasConnection)) {
+        controller.isIgnoring(true);
+        Future.delayed(const Duration(seconds: 3))
+            .then((value) => controller.isIgnoring(false));
+      }
+      if (response.success) {
+        Get.offAllNamed(RoutesManager.homeScreen);
+      }
+    }
   }
 }
