@@ -9,7 +9,10 @@ class EditProfileController extends GetxController {
   final nameController = TextEditingController(
       text: SharedPrefController().getByKey(key: UserInfo.name.name));
   final phoneController = TextEditingController(
-      text: SharedPrefController().getByKey(key: UserInfo.phone.name));
+    text: SharedPrefController().provider == 'phone'
+        ? SharedPrefController().getByKey(key: UserInfo.phone.name)
+        : SharedPrefController().getByKey(key: UserInfo.email.name),
+  );
   final passwordController = TextEditingController(text: '12345678');
   final canClear = false.obs;
 
@@ -40,7 +43,9 @@ class EditProfileController extends GetxController {
     );
     if (response.success) {
       await SharedPrefController().changeName(newName: nameController.text);
-      await SharedPrefController().changeImage(newImage: response.object);
+      if (response.object != null) {
+        await SharedPrefController().changeImage(newImage: response.object);
+      }
     }
     return response;
   }

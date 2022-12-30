@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "107912571935-gmvc1i8g6e7fj7uf3bmdfed0pr89n474.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bikes.tcbike",
+            "certificate_hash": "8cad6908451bb2f23b9fc785820cfbbc053a7f37"
+          }
+        },
+        {
           "client_id": "107912571935-i144j7ngkp2jipj47tuh0inmipqcvblq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -13,6 +13,13 @@ enum UserInfo {
   firstVisit,
   lang,
   suggestions,
+  provider,
+  email,
+}
+
+enum Providers {
+  google,
+  phone,
 }
 
 class SharedPrefController {
@@ -33,11 +40,26 @@ class SharedPrefController {
     await _sharedPreferences.setBool(UserInfo.firstVisit.name, true);
   }
 
-  Future<void> saveUser({required User user}) async {
+  // Future<void> saveUser({required User user}) async {
+  //   await _sharedPreferences.setBool(UserInfo.isLoggedIn.name, true);
+  //   await _sharedPreferences.setInt(UserInfo.id.name, user.id);
+  //   await _sharedPreferences.setString(UserInfo.phone.name, user.phone);
+  //   await _sharedPreferences.setString(UserInfo.name.name, user.name);
+  //   await _sharedPreferences.setString(
+  //       UserInfo.token.name, 'Bearer ${user.token}');
+  // }
+
+  Future<void> saveUser({
+    required User user,
+    String provider = 'phone',
+    String? email,
+  }) async {
     await _sharedPreferences.setBool(UserInfo.isLoggedIn.name, true);
     await _sharedPreferences.setInt(UserInfo.id.name, user.id);
     await _sharedPreferences.setString(UserInfo.phone.name, user.phone);
     await _sharedPreferences.setString(UserInfo.name.name, user.name);
+    await _sharedPreferences.setString(UserInfo.provider.name, provider);
+    await _sharedPreferences.setString(UserInfo.email.name, email ?? '');
     await _sharedPreferences.setString(
         UserInfo.token.name, 'Bearer ${user.token}');
   }
@@ -101,6 +123,9 @@ class SharedPrefController {
       _sharedPreferences.getBool(UserInfo.firstVisit.name) ?? true;
 
   String get token => _sharedPreferences.getString(UserInfo.token.name) ?? '';
+
+  String get provider =>
+      _sharedPreferences.getString(UserInfo.provider.name) ?? 'phone';
 
   String get lang =>
       _sharedPreferences.getString(UserInfo.lang.name) ??

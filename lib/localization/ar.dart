@@ -21,7 +21,7 @@ Map<String, String> arLocale = {
   'password': 'كلمة المرور',
   'required_field': '* هذا الحقل مطلوب',
   'password_condition': 'كلمة المرور 8 حروف على الأقل',
-  'phone_condition': 'أدخل رقم جوال صحيح يبدأ ب 972',
+  'phone_condition': 'يجب أن يكون رقم الجوال 9 خانات',
   'phone_helper': 'رقم الجوال يبدأ ب 972',
   'agree_with': 'الموافقة على',
   'agree': 'موافق',

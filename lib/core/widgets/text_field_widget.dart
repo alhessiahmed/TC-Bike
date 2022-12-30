@@ -66,8 +66,7 @@ class TextFieldWidget extends StatelessWidget {
               return 'required_field'.tr;
             } else if (isPassword && value.length < 8) {
               return 'password_condition'.tr;
-            } else if (isPhone &&
-                (!value.startsWith('972') || value.length < 12)) {
+            } else if (isPhone && value.length < 9) {
               return 'phone_condition'.tr;
             }
             return null;
@@ -79,12 +78,13 @@ class TextFieldWidget extends StatelessWidget {
           minLines: minLines,
           onChanged: onChange,
           onTap: onTap,
-          maxLength: isPhone ? 12 : null,
+          maxLength: isPhone ? 9 : null,
           onFieldSubmitted: onSubmitted,
           readOnly: readOnly,
           decoration: InputDecoration(
             counterText: counterText == null ? counterText : '',
             counterStyle: TextStyle(color: counterColor),
+
             // contentPadding:
             //     EdgeInsets.symmetric(horizontal: 30.w, vertical: 35.h),
             hintText: hintText,
@@ -92,14 +92,27 @@ class TextFieldWidget extends StatelessWidget {
               color: ColorsManager.subtitleColor,
               fontSize: 14.sp,
             ),
-            helperText: isPhone ? 'phone_helper'.tr : null,
+
+            // helperText: isPhone ? 'phone_helper'.tr : null,
             suffixIcon: canClear
                 ? IconButton(
                     onPressed: () => controller.clear(),
                     icon: const Icon(Icons.close_rounded),
                     iconSize: 24.r,
                   )
-                : suffixIcon,
+                : isPhone
+                    ? Row(
+                        children: [
+                          Container(
+                            width: 2,
+                            height: 24.h,
+                            color: ColorsManager.primary,
+                            margin: EdgeInsets.symmetric(horizontal: 10),
+                          ),
+                          Text('972'),
+                        ],
+                      )
+                    : suffixIcon,
             prefixIcon: isPassword
                 ? SvgPicture.asset(
                     ImagesManager.lock,

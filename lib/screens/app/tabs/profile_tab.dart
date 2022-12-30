@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tcbike/core/constants/colors_manager.dart';
 import 'package:tcbike/core/constants/images_manager.dart';
@@ -22,6 +25,62 @@ class ProfileTab extends GetView<HomeController> {
       // mainAxisAlignment: MainAxisAlignment.center,
       // mainAxisSize: MainAxisSize.max,
       children: [
+        // Container(
+        //   padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
+        //   decoration: BoxDecoration(
+        //     color: Colors.white,
+        //     borderRadius: BorderRadius.circular(12.r),
+        //   ),
+        //   child: Row(
+        //     children: [
+        //       CircleAvatar(
+        //         radius: 28.r,
+        //         backgroundColor: ColorsManager.secondary,
+        //         foregroundColor: ColorsManager.white,
+        //         backgroundImage: (SharedPrefController()
+        //                         .getByKey(key: UserInfo.image.name) !=
+        //                     null &&
+        //                 SharedPrefController()
+        //                     .getByKey<String>(key: UserInfo.image.name)!
+        //                     .isNotEmpty)
+        //             ? NetworkImage(SharedPrefController()
+        //                 .getByKey(key: UserInfo.image.name))
+        //             : const AssetImage(ImagesManager.avatar) as ImageProvider,
+        //         // child:
+        //         //     SharedPrefController().getByKey(key: UserInfo.image.name) !=
+        //         //             null
+        //         //         ? Image.network(SharedPrefController()
+        //         //             .getByKey(key: UserInfo.image.name))
+        //         //         : Icon(
+        //         //             Icons.person,
+        //         //             size: 36.r,
+        //         //           ),
+        //       ),
+        //       SizedBox(
+        //         width: 16.w,
+        //       ),
+        //       Column(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: [
+        //           Text(
+        //             SharedPrefController()
+        //                 .getByKey(key: UserInfo.name.name)
+        //                 .toString(),
+        //             style: const TextStyle(fontWeight: FontWeight.bold),
+        //           ),
+        //           SizedBox(height: 6.h),
+        //           Text(
+        //             SharedPrefController()
+        //                 .getByKey(key: UserInfo.phone.name)
+        //                 .toString(),
+        //             style: const TextStyle(color: Color(0xFF9CA3AF)),
+        //           ),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
         Container(
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
           decoration: BoxDecoration(
@@ -32,7 +91,7 @@ class ProfileTab extends GetView<HomeController> {
             children: [
               CircleAvatar(
                 radius: 28.r,
-                backgroundColor: ColorsManager.secondary,
+                backgroundColor: ColorsManager.disabled,
                 foregroundColor: ColorsManager.white,
                 backgroundImage: (SharedPrefController()
                                 .getByKey(key: UserInfo.image.name) !=
@@ -43,15 +102,6 @@ class ProfileTab extends GetView<HomeController> {
                     ? NetworkImage(SharedPrefController()
                         .getByKey(key: UserInfo.image.name))
                     : const AssetImage(ImagesManager.avatar) as ImageProvider,
-                // child:
-                //     SharedPrefController().getByKey(key: UserInfo.image.name) !=
-                //             null
-                //         ? Image.network(SharedPrefController()
-                //             .getByKey(key: UserInfo.image.name))
-                //         : Icon(
-                //             Icons.person,
-                //             size: 36.r,
-                //           ),
               ),
               SizedBox(
                 width: 16.w,
@@ -68,9 +118,13 @@ class ProfileTab extends GetView<HomeController> {
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    SharedPrefController()
-                        .getByKey(key: UserInfo.phone.name)
-                        .toString(),
+                    SharedPrefController().provider == 'phone'
+                        ? SharedPrefController()
+                            .getByKey(key: UserInfo.phone.name)
+                            .toString()
+                        : SharedPrefController()
+                            .getByKey(key: UserInfo.email.name)
+                            .toString(),
                     style: const TextStyle(color: Color(0xFF9CA3AF)),
                   ),
                 ],
@@ -78,6 +132,7 @@ class ProfileTab extends GetView<HomeController> {
             ],
           ),
         ),
+
         SizedBox(height: 16.h),
         Container(
           padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -168,7 +223,7 @@ class ProfileTab extends GetView<HomeController> {
     controller.isLoggingOut(true);
     Get.back();
     await SharedPrefController().logout();
-    // await GoogleSignIn().signOut();
+    await GoogleSignIn().disconnect().catchError((e) {});
     controller.isLoggingOut(false);
     Get.offAllNamed(RoutesManager.signInScreen);
     HomeController().pageIndex(0);

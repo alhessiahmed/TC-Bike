@@ -1,10 +1,11 @@
-// import 'dart:developer';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:tcbike/core/utils/show_snackbar.dart';
-// import '../../api/controllers/auth_api_controller.dart';
+import '../../api/controllers/auth_api_controller.dart';
 import '../../core/constants/colors_manager.dart';
 import '../../core/constants/constants_manager.dart';
 import '../../core/routes/routes_manager.dart';
@@ -231,15 +232,26 @@ class SignUpScreen extends GetView<SignUpController> {
   }
 
   Future<void> _performLoginWithGoogle() async {
-    // log('message');
-    // final response = await AuthApiController().signInWithGoogle();
-    // log('message2');
-    // if (response != null) {
-    //   log(response.message);
-    //   showSnackbar(
-    //     message: response.message,
-    //     success: response.success,
-    //   );
-    // }
+    log('message');
+    controller.isLoading(true);
+    final response = await AuthApiController().signInWithGoogle();
+    controller.isLoading(false);
+    log('message2');
+    log('response: ${response?.message} ${response?.success}');
+    if (response != null) {
+      log(response.message);
+      showSnackbar(
+        message: response.message,
+        success: response.success,
+      );
+      if (!(await InternetConnectionChecker().hasConnection)) {
+        controller.isIgnoring(true);
+        Future.delayed(const Duration(seconds: 3))
+            .then((value) => controller.isIgnoring(false));
+      }
+      if (response.success) {
+        Get.offAllNamed(RoutesManager.homeScreen);
+      }
+    }
   }
 }

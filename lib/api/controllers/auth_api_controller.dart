@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:tcbike/api/api_helper.dart';
 import 'package:tcbike/api/api_settings.dart';
 import 'package:tcbike/model/api_response.dart';
 import 'package:tcbike/model/user.dart';
 import 'package:tcbike/pref/shared_pref_controller.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthApiController with ApiHelper {
   Future<ApiResponse> register({
@@ -154,56 +156,58 @@ class AuthApiController with ApiHelper {
     return failedResponse;
   }
 
-  // Future<ApiResponse?> signInWithGoogle() async {
-  //   // try {
-  //   final isInternetConnected = await InternetConnectionChecker().hasConnection;
-  //   GoogleSignInAccount? googleUser;
-  //   if (isInternetConnected) {
-  //     googleUser = await GoogleSignIn().signIn();
-  //   } else {
-  //     return ApiResponse(message: 'لا يوجد إتصال إنترنت', success: false);
-  //   }
+  Future<ApiResponse?> signInWithGoogle() async {
+    try {
+      final isInternetConnected =
+          await InternetConnectionChecker().hasConnection;
+      GoogleSignInAccount? googleUser;
+      if (isInternetConnected) {
+        googleUser = await GoogleSignIn().signIn();
+      } else {
+        return ApiResponse(message: 'لا يوجد إتصال إنترنت', success: false);
+      }
 
-  //   if (googleUser != null) {
-  //     Uri uri = Uri.parse(ApiSettings.googleLogin);
-  //     String? fcmToken = await FirebaseMessaging.instance.getToken();
-  //     // log('000');
-  //     final response = await http.post(
-  //       uri,
-  //       headers: languageHeaders,
-  //       body: {
-  //         'google_id': googleUser.id,
-  //         'name': googleUser.displayName,
-  //         'email': googleUser.email,
-  //         'avatar': googleUser.photoUrl.toString(),
-  //         'fcm': fcmToken,
-  //       },
-  //     );
-  //     if (response.statusCode == 200 ||
-  //         response.statusCode == 400 ||
-  //         response.statusCode == 422) {
-  //       var jsonResponse = jsonDecode(response.body);
-  //       final jsonObject = jsonResponse['data'];
-  //       User user = User();
-  //       user.id = jsonObject['id'];
-  //       user.name = jsonObject['name'] ?? 'google user';
-  //       user.imageUrl = jsonObject['icon_url'];
-  //       user.phone = jsonObject['phone'] ?? '';
-  //       user.token = jsonObject['token'];
-  //       await SharedPrefController().saveUser(user: user);
-  //       await SharedPrefController().setRememberMeStatus(true);
-  //       return ApiResponse(
-  //         message: jsonResponse['message'],
-  //         success: jsonResponse['success'],
-  //       );
-  //     }
-  //     return failedResponse;
-  //     // 118102119116392959738 100919529787437016754
-  //     //   }
-  //     //   return null;
-  //     // } catch (e) {
-  //     //   return ApiResponse(message: e.toString(), success: false);
-  //   }
-  //   return null;
-  // }
+      if (googleUser != null) {
+        Uri uri = Uri.parse(ApiSettings.googleLogin);
+        // log('000');
+        final response = await http.post(
+          uri,
+          headers: languageHeaders,
+          body: {
+            'google_id': googleUser.id,
+            'name': googleUser.displayName,
+            'email': googleUser.email,
+            'avatar': googleUser.photoUrl.toString(),
+          },
+        );
+        if (response.statusCode == 200 ||
+            response.statusCode == 400 ||
+            response.statusCode == 422) {
+          var jsonResponse = jsonDecode(response.body);
+          final jsonObject = jsonResponse['data'];
+          User user = User();
+          user.id = jsonObject['id'];
+          user.name = jsonObject['name'] ?? 'google user';
+          user.imageUrl = jsonObject['icon_url'];
+          user.phone = jsonObject['phone'] ?? '';
+          user.token = jsonObject['token'];
+          log(user.toString());
+          await SharedPrefController().saveUser(
+            user: user,
+            provider: Providers.google.name,
+            email: googleUser.email,
+          );
+          await SharedPrefController().setRememberMeStatus(true);
+          return ApiResponse(
+            message: jsonResponse['message'],
+            success: jsonResponse['success'],
+          );
+        }
+        return failedResponse;
+      }
+      return null;
+    } catch (e) {
+      return ApiResponse(message: e.toString(), success: false);
+    }
+  }
 }
