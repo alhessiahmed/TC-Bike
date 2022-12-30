@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -8,7 +9,7 @@ import 'package:tcbike/model/api_response.dart';
 import 'package:tcbike/pref/shared_pref_controller.dart';
 
 class UserApiController with ApiHelper {
-  Future<ApiResponse> updateUserProfile({
+  Future<ApiResponse<String>> updateUserProfile({
     String? imgPath,
     required String name,
   }) async {
@@ -22,8 +23,11 @@ class UserApiController with ApiHelper {
       request.files.add(file);
     }
     request.fields['name'] = name;
-    request.fields['phone'] =
-        SharedPrefController().getByKey(key: UserInfo.phone.name);
+    if (SharedPrefController().provider == 'phone') {
+      request.fields['phone'] =
+          SharedPrefController().getByKey(key: UserInfo.phone.name);
+    }
+
     // request.fields['_method'] = 'put';
     var response = await request.send();
     // print('---------------------${response.statusCode}---------------------');
@@ -33,16 +37,17 @@ class UserApiController with ApiHelper {
         response.statusCode == 422) {
       var body = await response.stream.transform(utf8.decoder).first;
       var jsonResponse = jsonDecode(body);
-      // print(jsonResponse['data']['icon_url']);
-      return ApiResponse(
-        message: jsonResponse['message'],
-        success: jsonResponse['success'],
-        object: response.statusCode == 200
-            ? jsonResponse['data']['icon_url']
-            : null,
-      );
+      print(jsonResponse['data']['icon_url']);
+      return jsonResponse['data']['icon_url'] != null
+          ? ApiResponse(
+              message: jsonResponse['message'],
+              success: jsonResponse['success'],
+              object: jsonResponse['data']['icon_url'])
+          : ApiResponse(
+              message: jsonResponse['message'],
+              success: jsonResponse['success']);
     }
-    return failedResponse;
+    return ApiResponse(message: 'Error', success: false);
   }
 
   Future<ApiResponse> changePassword({
