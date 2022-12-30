@@ -23,7 +23,7 @@ class AuthApiController with ApiHelper {
       uri,
       body: {
         'name': name,
-        'phone': phone,
+        'phone': '972$phone',
         'password': password,
         'password_confirmation': password,
         'fcm': fcmToken,
@@ -51,7 +51,7 @@ class AuthApiController with ApiHelper {
     var response = await http.post(
       uri,
       body: {
-        'phone': phone,
+        'phone': '972$phone',
         'password': password,
         'fcm': fcmToken,
       },
@@ -85,7 +85,7 @@ class AuthApiController with ApiHelper {
       uri,
       headers: languageHeaders,
       body: {
-        'phone': phone,
+        'phone': '972$phone',
         'code': code,
       },
     );
@@ -115,7 +115,7 @@ class AuthApiController with ApiHelper {
       uri,
       headers: languageHeaders,
       body: {
-        'phone': phone,
+        'phone': '972$phone',
       },
     );
     if (response.statusCode == 200 ||
@@ -138,7 +138,7 @@ class AuthApiController with ApiHelper {
   }) async {
     Uri uri = Uri.parse(ApiSettings.resetPassword);
     var response = await http.post(uri, body: {
-      'phone': phone,
+      'phone': '972$phone',
       'code': code,
       'new_password': password,
       'new_password_confirmation': password,
@@ -169,8 +169,6 @@ class AuthApiController with ApiHelper {
 
       if (googleUser != null) {
         Uri uri = Uri.parse(ApiSettings.googleLogin);
-        String? fcmToken = await FirebaseMessaging.instance.getToken();
-
         // log('000');
         final response = await http.post(
           uri,
@@ -180,7 +178,6 @@ class AuthApiController with ApiHelper {
             'name': googleUser.displayName,
             'email': googleUser.email,
             'avatar': googleUser.photoUrl.toString(),
-            'fcm': fcmToken,
           },
         );
         if (response.statusCode == 200 ||
