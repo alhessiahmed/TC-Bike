@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +19,8 @@ class EditProfileScreen extends GetView<EditProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    // log(controller.pickedImage!.path.toString());
+    // log(SharedPrefController().getByKey(key: UserInfo.image.name).toString());
     return Stack(
       children: [
         Scaffold(
@@ -41,8 +44,11 @@ class EditProfileScreen extends GetView<EditProfileController> {
                               File(controller.pickedImage!.path),
                             )
                           : SharedPrefController()
-                                      .getByKey(key: UserInfo.image.name) !=
-                                  null
+                                          .getByKey(key: UserInfo.image.name) !=
+                                      null &&
+                                  SharedPrefController()
+                                          .getByKey(key: UserInfo.image.name) !=
+                                      'null'
                               ? NetworkImage(
                                   SharedPrefController()
                                       .getByKey(key: UserInfo.image.name),

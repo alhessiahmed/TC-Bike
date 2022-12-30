@@ -18,7 +18,7 @@ class AboutApiController with ApiHelper {
       body: {
         'name': name,
         'email': email,
-        'phone': phone,
+        'phone': '972$phone',
         'message': message,
       },
     );
