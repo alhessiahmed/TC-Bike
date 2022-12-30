@@ -46,7 +46,7 @@ class NotificationsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  snapshot.data![index].time ?? 'now'.tr,
+                                  snapshot.data![index].time,
                                   style: TextStylesManager.subTitle,
                                 ),
                                 SizedBox(
@@ -56,8 +56,7 @@ class NotificationsScreen extends StatelessWidget {
                                   width: (Get.width * (3 / 4) - 16),
                                   child: Text(
                                     // 'semi_fill'.tr,
-                                    snapshot.data![index].title ??
-                                        'semi_fill'.tr,
+                                    snapshot.data![index].body,
                                     style: TextStyle(
                                       fontSize: 12.sp,
                                     ),

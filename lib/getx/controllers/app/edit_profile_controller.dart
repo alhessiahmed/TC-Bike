@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,8 +45,18 @@ class EditProfileController extends GetxController {
     );
     if (response.success) {
       await SharedPrefController().changeName(newName: nameController.text);
-      if (response.object != null) {
-        await SharedPrefController().changeImage(newImage: response.object);
+      if (response.object != null &&
+          response.object!.isNotEmpty &&
+          response.object != 'null') {
+        // log(response.object.toString() + ' --------------------- ');
+        // log('IS THERE AN IMAGE HERE ??');
+        String imgUrl;
+        if (!response.object!.startsWith('http')) {
+          imgUrl = 'http://tcbike.bulbul-app.com/${response.object}';
+        } else {
+          imgUrl = response.object!;
+        }
+        await SharedPrefController().changeImage(newImage: imgUrl);
       }
     }
     return response;

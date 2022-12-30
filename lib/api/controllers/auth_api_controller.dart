@@ -169,6 +169,8 @@ class AuthApiController with ApiHelper {
 
       if (googleUser != null) {
         Uri uri = Uri.parse(ApiSettings.googleLogin);
+        String? fcmToken = await FirebaseMessaging.instance.getToken();
+
         // log('000');
         final response = await http.post(
           uri,
@@ -178,6 +180,7 @@ class AuthApiController with ApiHelper {
             'name': googleUser.displayName,
             'email': googleUser.email,
             'avatar': googleUser.photoUrl.toString(),
+            'fcm': fcmToken,
           },
         );
         if (response.statusCode == 200 ||

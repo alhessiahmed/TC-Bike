@@ -4,12 +4,28 @@ import 'package:tcbike/api/api_helper.dart';
 import 'package:tcbike/api/api_settings.dart';
 import 'package:tcbike/model/api_response.dart';
 import 'package:tcbike/model/category.dart';
+import 'package:tcbike/model/faq.dart';
 import 'package:tcbike/model/product.dart';
 import 'package:tcbike/model/product_details.dart';
 
 import '../../model/api_notification.dart';
 
 class ContentApiController with ApiHelper {
+  Future<List<Faq>> readFaqs() async {
+    List<Faq> faqs = [];
+    Uri uri = Uri.parse(ApiSettings.faqs);
+    var response = await http.get(
+      uri,
+      headers: acceptHeader,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      var list = jsonResponse['data'] as List;
+      faqs = list.map((e) => Faq.fromJson(e)).toList();
+    }
+    return faqs;
+  }
+
   Future<List<ApiNotification>> readNotifications() async {
     List<ApiNotification> notifications = [];
     Uri uri = Uri.parse(ApiSettings.getNotifications);
@@ -20,15 +36,7 @@ class ContentApiController with ApiHelper {
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body);
       final dataList = jsonResponse['data'] as List;
-      for (var element in dataList) {
-        ApiNotification not = ApiNotification();
-        not.id = element['id'];
-        not.time = element['time'];
-        not.body = element['body'];
-        not.data = element['data'];
-        not.title = element['title'];
-        notifications.add(not);
-      }
+      notifications = dataList.map((e) => ApiNotification.fromJson(e)).toList();
     }
     return notifications;
   }

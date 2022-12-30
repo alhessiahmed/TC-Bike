@@ -35,4 +35,5 @@ class ApiSettings {
   // About
   static const String about = '$_baseUrl/about';
   static const String contactUs = '$_baseUrl/contactUs';
+  static const String faqs = '$_baseUrl/getFaqs';
 }
