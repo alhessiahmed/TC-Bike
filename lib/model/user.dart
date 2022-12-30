@@ -15,4 +15,14 @@ class User {
     imageUrl = json['icon_url'];
     token = json['token'];
   }
+  @override
+  String toString() {
+    return '''
+id = $id,
+name = $name,
+phone  = $phone ,
+imageUrl = $imageUrl,
+token = $token,
+''';
+  }
 }

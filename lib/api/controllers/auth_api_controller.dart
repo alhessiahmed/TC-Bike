@@ -191,12 +191,18 @@ class AuthApiController with ApiHelper {
           user.imageUrl = jsonObject['icon_url'];
           user.phone = jsonObject['phone'] ?? '';
           user.token = jsonObject['token'];
+          log('---------------------1');
           log(user.toString());
+          log('---------------------2');
           await SharedPrefController().saveUser(
             user: user,
             provider: Providers.google.name,
             email: googleUser.email,
           );
+          log('---------------------3');
+          await SharedPrefController()
+              .changeImage(newImage: user.imageUrl ?? '');
+          log('---------------------4');
           await SharedPrefController().setRememberMeStatus(true);
           return ApiResponse(
             message: jsonResponse['message'],
