@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tcbike/core/constants/colors_manager.dart';
 import 'package:tcbike/core/constants/images_manager.dart';
 import 'package:tcbike/core/utils/show_snackbar.dart';

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -238,7 +237,6 @@ class HomeTab extends GetView<HomeController> {
                     SectionBarWidget(
                       title: 'most_special'.tr,
                     ),
-
                     InkWell(
                       onTap: () {
                         controller.productId =
