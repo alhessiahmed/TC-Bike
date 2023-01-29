@@ -47,8 +47,9 @@ class EditProfileScreen extends GetView<EditProfileController> {
                                           .getByKey(key: UserInfo.image.name) !=
                                       null &&
                                   SharedPrefController()
-                                          .getByKey(key: UserInfo.image.name) !=
-                                      'null'
+                                      .getByKey<String>(
+                                          key: UserInfo.image.name)!
+                                      .isNotEmpty
                               ? NetworkImage(
                                   SharedPrefController()
                                       .getByKey(key: UserInfo.image.name),

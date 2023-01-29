@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:tcbike/core/utils/show_snackbar.dart';
 import 'package:tcbike/pref/shared_pref_controller.dart';
@@ -30,9 +31,12 @@ class SignInScreen extends GetView<SignInController> {
             child: ListView(
               padding: EdgeInsets.all(24.w),
               children: [
-                Text(
-                  'sign_in'.tr,
-                  style: TextStylesManager.title,
+                InkWell(
+                  onTap: () => GoogleSignIn().disconnect(),
+                  child: Text(
+                    'sign_in'.tr,
+                    style: TextStylesManager.title,
+                  ),
                 ),
                 SizedBox(height: 14.h),
                 Text(
@@ -204,8 +208,6 @@ class SignInScreen extends GetView<SignInController> {
   }
 
   Future<void> _performLoginWithGoogle() async {
-    // GoogleSignIn().disconnect();
-
     log('message');
     controller.isLoading(true);
     final response = await AuthApiController().signInWithGoogle();

@@ -69,7 +69,10 @@ class SharedPrefController {
   }
 
   Future<void> changeImage({required String newImage}) async {
-    await _sharedPreferences.setString(UserInfo.image.name, newImage);
+    newImage.startsWith('http')
+        ? await _sharedPreferences.setString(UserInfo.image.name, newImage)
+        : await _sharedPreferences.setString(
+            UserInfo.image.name, 'http://tcbike.bulbul-app.com/$newImage');
   }
 
   Future<void> saveLang({required String lang}) async {
