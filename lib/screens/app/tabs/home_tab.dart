@@ -239,7 +239,6 @@ class HomeTab extends GetView<HomeController> {
                             title: 'most_special'.tr,
                           )
                         : Container(),
-
                     controller.homeModel!.mostSoldProduct != null
                         ? InkWell(
                             onTap: () {
