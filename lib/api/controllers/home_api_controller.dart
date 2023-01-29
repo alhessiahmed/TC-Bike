@@ -32,8 +32,11 @@ class HomeApiController with ApiHelper {
       final products = data['products'] as List;
       homeModel.products = products.map((e) => Product.fromJson(e)).toList();
 
-      final mostSoldProduct = Product.fromJson(data['mostSoldProduct']);
+      if(data['mostSoldProduct'].runtimeType == Map<String, dynamic>){
+final mostSoldProduct = Product.fromJson(data['mostSoldProduct']);
       homeModel.mostSoldProduct = mostSoldProduct;
+      }
+      
 
       return homeModel;
     }
@@ -46,5 +49,5 @@ class HomeModel {
   late List<Category> categories;
   late List<Product> offers;
   late List<Product> products;
-  late Product mostSoldProduct;
+   Product? mostSoldProduct;
 }

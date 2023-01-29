@@ -235,14 +235,14 @@ class HomeTab extends GetView<HomeController> {
                       ),
                     ),
                     // MOST SPECIAL
-                    SectionBarWidget(
+                    controller.homeModel!.mostSoldProduct != null ? SectionBarWidget(
                       title: 'most_special'.tr,
-                    ),
+                    ) : Container(),
 
-                    InkWell(
+                    controller.homeModel!.mostSoldProduct != null ? InkWell(
                       onTap: () {
                         controller.productId =
-                            controller.homeModel!.mostSoldProduct.id;
+                            controller.homeModel!.mostSoldProduct!.id;
                         Get.toNamed(RoutesManager.productDetailsScreen);
                       },
                       child: Container(
@@ -256,13 +256,13 @@ class HomeTab extends GetView<HomeController> {
                         width: Get.width,
                         height: 185.h,
                         child: ProductCard(
-                          title: controller.homeModel!.mostSoldProduct.name,
+                          title: controller.homeModel!.mostSoldProduct!.name,
                           subTitle:
-                              controller.homeModel!.mostSoldProduct.description,
-                          price: controller.homeModel!.mostSoldProduct.price
+                              controller.homeModel!.mostSoldProduct!.description,
+                          price: controller.homeModel!.mostSoldProduct!.price
                               .toString(),
                           image: controller
-                              .homeModel!.mostSoldProduct.images.first.imageUrl,
+                              .homeModel!.mostSoldProduct!.images.first.imageUrl,
                         ),
                       ),
                       // child: Container(
@@ -322,7 +322,7 @@ class HomeTab extends GetView<HomeController> {
                       //     ],
                       //   ),
                       // ),
-                    ),
+                    ) : Container(),
                   ],
                 ),
     );
