@@ -234,93 +234,101 @@ class HomeTab extends GetView<HomeController> {
                       ),
                     ),
                     // MOST SPECIAL
-                    SectionBarWidget(
-                      title: 'most_special'.tr,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        controller.productId =
-                            controller.homeModel!.mostSoldProduct.id;
-                        Get.toNamed(RoutesManager.productDetailsScreen);
-                      },
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 16.sp),
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          color: ColorsManager.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          boxShadow: ConstantsManager.boxShadow,
-                        ),
-                        width: Get.width,
-                        height: 185.h,
-                        child: ProductCard(
-                          title: controller.homeModel!.mostSoldProduct.name,
-                          subTitle:
-                              controller.homeModel!.mostSoldProduct.description,
-                          price: controller.homeModel!.mostSoldProduct.price
-                              .toString(),
-                          image: controller
-                              .homeModel!.mostSoldProduct.images.first.imageUrl,
-                        ),
-                      ),
-                      // child: Container(
-                      //   margin: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 16.sp),
-                      //   clipBehavior: Clip.antiAlias,
-                      //   decoration: BoxDecoration(
-                      //     color: ColorsManager.white,
-                      //     borderRadius: BorderRadius.circular(12.r),
-                      //     boxShadow: ConstantsManager.boxShadow,
-                      //   ),
-                      //   child: Column(
-                      //     children: [
-                      //       Image.asset(
-                      //         ImagesManager.test[3],
-                      //         fit: BoxFit.cover,
-                      //         height: 126.h,
-                      //         width: Get.width,
-                      //       ),
-                      //       ListTile(
-                      //         title: Padding(
-                      //           padding: EdgeInsets.only(bottom: 5.h),
-                      //           child: Text(
-                      //             controller.homeModel!.mostSoldProduct.name,
-                      //             maxLines: 1,
-                      //             overflow: TextOverflow.ellipsis,
-                      //           ),
-                      //         ),
-                      //         // subtitle: Row(
-                      //         //   children: [
-                      //         //     SvgPicture.asset(ImagesManager.site),
-                      //         //     SizedBox(width: 12.w),
-                      //         //     Text(
-                      //         //       '0 كم',
-                      //         //       style: TextStyle(
-                      //         //         fontSize: 12.sp,
-                      //         //       ),
-                      //         //     ),
-                      //         //   ],
-                      //         // ),
-                      //         // trailing: SizedBox(
-                      //         //   width: 80.w,
-                      //         //   child: Row(
-                      //         //     mainAxisAlignment:
-                      //         //         MainAxisAlignment.spaceBetween,
-                      //         //     children: [
-                      //         //       SvgPicture.asset(ImagesManager.clock),
-                      //         //       Text(
-                      //         //         '5 دقيقة',
-                      //         //         style: TextStyle(
-                      //         //           fontSize: 12.sp,
-                      //         //         ),
-                      //         //       ),
-                      //         //     ],
-                      //         //   ),
-                      //         // ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                    ),
+                    controller.homeModel!.mostSoldProduct != null
+                        ? SectionBarWidget(
+                            title: 'most_special'.tr,
+                          )
+                        : Container(),
+
+                    controller.homeModel!.mostSoldProduct != null
+                        ? InkWell(
+                            onTap: () {
+                              controller.productId =
+                                  controller.homeModel!.mostSoldProduct!.id;
+                              Get.toNamed(RoutesManager.productDetailsScreen);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  16.sp, 8.sp, 16.sp, 16.sp),
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: ColorsManager.white,
+                                borderRadius: BorderRadius.circular(12.r),
+                                boxShadow: ConstantsManager.boxShadow,
+                              ),
+                              width: Get.width,
+                              height: 185.h,
+                              child: ProductCard(
+                                title:
+                                    controller.homeModel!.mostSoldProduct!.name,
+                                subTitle: controller
+                                    .homeModel!.mostSoldProduct!.description,
+                                price: controller
+                                    .homeModel!.mostSoldProduct!.price
+                                    .toString(),
+                                image: controller.homeModel!.mostSoldProduct!
+                                    .images.first.imageUrl,
+                              ),
+                            ),
+                            // child: Container(
+                            //   margin: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 16.sp),
+                            //   clipBehavior: Clip.antiAlias,
+                            //   decoration: BoxDecoration(
+                            //     color: ColorsManager.white,
+                            //     borderRadius: BorderRadius.circular(12.r),
+                            //     boxShadow: ConstantsManager.boxShadow,
+                            //   ),
+                            //   child: Column(
+                            //     children: [
+                            //       Image.asset(
+                            //         ImagesManager.test[3],
+                            //         fit: BoxFit.cover,
+                            //         height: 126.h,
+                            //         width: Get.width,
+                            //       ),
+                            //       ListTile(
+                            //         title: Padding(
+                            //           padding: EdgeInsets.only(bottom: 5.h),
+                            //           child: Text(
+                            //             controller.homeModel!.mostSoldProduct.name,
+                            //             maxLines: 1,
+                            //             overflow: TextOverflow.ellipsis,
+                            //           ),
+                            //         ),
+                            //         // subtitle: Row(
+                            //         //   children: [
+                            //         //     SvgPicture.asset(ImagesManager.site),
+                            //         //     SizedBox(width: 12.w),
+                            //         //     Text(
+                            //         //       '0 كم',
+                            //         //       style: TextStyle(
+                            //         //         fontSize: 12.sp,
+                            //         //       ),
+                            //         //     ),
+                            //         //   ],
+                            //         // ),
+                            //         // trailing: SizedBox(
+                            //         //   width: 80.w,
+                            //         //   child: Row(
+                            //         //     mainAxisAlignment:
+                            //         //         MainAxisAlignment.spaceBetween,
+                            //         //     children: [
+                            //         //       SvgPicture.asset(ImagesManager.clock),
+                            //         //       Text(
+                            //         //         '5 دقيقة',
+                            //         //         style: TextStyle(
+                            //         //           fontSize: 12.sp,
+                            //         //         ),
+                            //         //       ),
+                            //         //     ],
+                            //         //   ),
+                            //         // ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                          )
+                        : Container(),
                   ],
                 ),
     );
