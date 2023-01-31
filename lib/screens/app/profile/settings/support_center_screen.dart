@@ -35,6 +35,8 @@ class SupportCenterScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16.r),
                             boxShadow: ConstantsManager.boxShadow,
                           ),
+                          // To learn more about ExpansionPanel head to this video on Youtube.
+                          // https://youtu.be/2aJZzRMziJc
                           child: ExpansionTile(
                             collapsedBackgroundColor: ColorsManager.white,
                             backgroundColor: ColorsManager.secondary,
