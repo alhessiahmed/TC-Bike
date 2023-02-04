@@ -8,6 +8,7 @@ import 'package:tcbike/core/widgets/product_card_widget.dart';
 import 'package:tcbike/core/widgets/shimmers/categories_shimmer.dart';
 import 'package:tcbike/getx/controllers/app/category_controller.dart';
 import 'package:tcbike/getx/controllers/app/home_controller.dart';
+import 'package:tcbike/getx/controllers/app/sub_category_controller.dart';
 import '../../../core/routes/routes_manager.dart';
 
 class CategoriesTab extends GetView<CategoryController> {
@@ -46,7 +47,10 @@ class CategoriesTab extends GetView<CategoryController> {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
-                                    /// TODO: FIX THIS
+                                    SubCategoryController().categoryID =
+                                        controller.categories[index].id;
+                                    SubCategoryController().categoryName =
+                                        controller.categories[index].name;
                                     Get.toNamed(
                                         RoutesManager.subCategoryScreen);
                                   },

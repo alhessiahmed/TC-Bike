@@ -56,20 +56,24 @@ class ContentApiController with ApiHelper {
     return categories;
   }
 
-  // Future<List<Category>> readSubCategories() async {
-  //   List<Category> subCategories = [];
-  //   Uri uri = Uri.parse(ApiSettings.subCategories);
-  //   var response = await http.get(
-  //     uri,
-  //     headers: acceptHeader,
-  //   );
-  //   if (response.statusCode == 200) {
-  //     final jsonResponse = jsonDecode(response.body);
-  //     final dataList = jsonResponse['data'] as List;
-  //     subCategories = dataList.map((e) => SubCategory.fromJson(e)).toList();
-  //   }
-  //   return subCategories;
-  // }
+  Future<List<Category>> readSubCategories({required int categoryId}) async {
+    List<Category> subCategories = [];
+    Uri uri = Uri.parse(ApiSettings.subCategories);
+    var response = await http.post(
+      uri,
+      headers: acceptHeader,
+      body: {
+        'category_main_id': categoryId.toString(),
+      },
+    );
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      final dataList = jsonResponse['data'] as List;
+      subCategories = dataList.map((e) => Category.fromJson(e)).toList();
+    }
+    // print(subCategories);
+    return subCategories;
+  }
 
   Future<List<Product>> readProductsByCategory({required int id}) async {
     List<Product> products = [];
