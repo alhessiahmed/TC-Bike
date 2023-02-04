@@ -33,7 +33,7 @@ class CategoriesTab extends GetView<CategoryController> {
                             onTap: () async {
                               controller.catIndex(index);
                               await controller.readCategoryProducts(
-                                  id: controller.categories[index].id);
+                                  id: controller.categories[index].id,);
                             },
                             child: Obx(
                               () => AnimatedContainer(
