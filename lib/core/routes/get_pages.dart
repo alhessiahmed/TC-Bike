@@ -5,9 +5,12 @@ import 'package:tcbike/getx/bindings/app/favorite_binding.dart';
 import 'package:tcbike/getx/bindings/app/payment_binding.dart';
 import 'package:tcbike/getx/bindings/app/product_details_binding.dart';
 import 'package:tcbike/getx/bindings/app/settings_binding.dart';
+import 'package:tcbike/getx/bindings/app/subcategory_binding.dart';
 import 'package:tcbike/getx/bindings/auth/change_password_binding.dart';
+import 'package:tcbike/getx/controllers/app/sub_category_controller.dart';
 import 'package:tcbike/screens/app/profile/about_us_screen.dart';
 import 'package:tcbike/screens/app/search_screen.dart';
+import 'package:tcbike/screens/app/sub_category_screen.dart';
 import 'package:tcbike/screens/auth/change_password_screen.dart';
 import '../../getx/bindings/app/search_binding.dart';
 import '../../screens/app/profile/favorite_screen.dart';
@@ -91,6 +94,11 @@ final List<GetPage<dynamic>> getPages = [
       HomeBinding(),
       CategoryBinding(),
     ],
+  ),
+  GetPage(
+    name: RoutesManager.subCategoryScreen,
+    page: () => const SubCategoriesScreen(),
+    binding: SubCategoryBinding(),
   ),
   GetPage(
     name: RoutesManager.searchScreen,

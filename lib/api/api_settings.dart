@@ -14,6 +14,7 @@ class ApiSettings {
 
   // Categories
   static const String categories = '$_baseUrl/getCategories';
+  static const String subCategories = '$_baseUrl/getSubCategories';
 
   // Products
   static const String _products = '$_baseUrl/products';

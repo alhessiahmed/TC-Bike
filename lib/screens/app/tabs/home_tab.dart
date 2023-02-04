@@ -99,13 +99,14 @@ class HomeTab extends GetView<HomeController> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () async {
-                              controller.pageIndex(1);
-                              CategoryController().catIndex(index + 1);
-                              CategoryController().isLoading(true);
-                              await CategoryController().readCategoryProducts(
-                                  id: controller
-                                      .homeModel!.categories[index].id);
-                              CategoryController().isLoading(false);
+                              /// TODO: FIX THIS
+                              // controller.pageIndex(1);
+                              // CategoryController().catIndex(index + 1);
+                              // CategoryController().isLoading(true);
+                              // await CategoryController().readCategoryProducts(
+                              //     id: controller
+                              //         .homeModel!.categories[index].id);
+                              // CategoryController().isLoading(false);
                             },
                             child: Container(
                               // width: 80.w,

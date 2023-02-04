@@ -11,6 +11,7 @@ class RoutesManager {
   static const verificationScreen = '/verification_screen';
 
   static const homeScreen = '/home_screen';
+  static const subCategoryScreen = '/sub_category_screen';
   static const searchScreen = '/search_screen';
   static const productDetailsScreen = '/product_details_screen';
   static const cartScreen = '/cart_screen';

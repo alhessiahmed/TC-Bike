@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tcbike/core/constants/colors_manager.dart';
+import 'package:tcbike/core/constants/images_manager.dart';
 import 'package:tcbike/core/widgets/no_data_widget.dart';
 import 'package:tcbike/core/widgets/product_card_widget.dart';
 import 'package:tcbike/core/widgets/shimmers/categories_shimmer.dart';
 import 'package:tcbike/getx/controllers/app/category_controller.dart';
 import 'package:tcbike/getx/controllers/app/home_controller.dart';
+import 'package:tcbike/getx/controllers/app/sub_category_controller.dart';
 import '../../../core/routes/routes_manager.dart';
 
 class CategoriesTab extends GetView<CategoryController> {
@@ -20,90 +22,48 @@ class CategoriesTab extends GetView<CategoryController> {
           : controller.categories.isEmpty
               ? const NoDataWidget()
               : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 74.h,
-                      child: ListView.separated(
-                        padding:
-                            EdgeInsets.fromLTRB(16.sp, 20.sp, 16.sp, 16.sp),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.categories.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () async {
-                              controller.catIndex(index);
-                              await controller.readCategoryProducts(
-                                  id: controller.categories[index].id,);
-                            },
-                            child: Obx(
-                              () => AnimatedContainer(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: index == controller.catIndex.value
-                                      ? 16.w
-                                      : 24.w,
-                                ),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.r),
-                                  color: index == controller.catIndex.value
-                                      ? ColorsManager.secondary
-                                      : const Color(0xFFF1F1F1),
-                                ),
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.fastOutSlowIn,
-                                child: Text(
-                                  // index == 0 ? 'الكل' : 'عجلات',
-                                  controller.categories[index].name,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: index == controller.catIndex.value
-                                        ? ColorsManager.white
-                                        : null,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: 5.w,
-                          );
-                        },
-                      ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 17.h, 16.w, 0),
+                      child: Text('all_categories'.tr),
                     ),
                     Expanded(
-                      child: controller.isProductsLoading.value
+                      child: controller.isLoading.value
                           ? const CategoriesShimmer()
                           : GridView.builder(
                               physics: const BouncingScrollPhysics(),
-                              padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 20.h),
-                              itemCount: controller.products.length,
+                              padding:
+                                  EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 20.h),
+                              itemCount: controller.categories.length,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisSpacing: 10.r,
-                                mainAxisSpacing: 20.r,
-                                crossAxisCount: 2,
-                                // childAspectRatio: 167 / 174,
-                                mainAxisExtent: 195.h,
+                                crossAxisSpacing: 9.r,
+                                mainAxisSpacing: 11.r,
+                                crossAxisCount: 3,
+                                childAspectRatio: 108 / 80,
+                                // mainAxisExtent: 195.h,
                               ),
                               itemBuilder: (context, index) {
-                                final product = controller.products[index];
                                 return InkWell(
                                   onTap: () {
-                                    HomeController().productId = product.id;
+                                    SubCategoryController().categoryID =
+                                        controller.categories[index].id;
+                                    SubCategoryController().categoryName =
+                                        controller.categories[index].name;
                                     Get.toNamed(
-                                        RoutesManager.productDetailsScreen);
+                                        RoutesManager.subCategoryScreen);
                                   },
-                                  child: ProductCard(
-                                    title: product.name,
-                                    subTitle: product.description,
-                                    oldPrice: product.price.toString(),
-                                    price: product.offerPrice.toString(),
-                                    image: product.images.first.imageUrl,
-                                    specialOffer: product.isOffer,
-                                    forCategories: true,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                    ),
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: ImagesManager.placeholder,
+                                      image:
+                                          controller.categories[index].iconUrl,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 );
                               },
