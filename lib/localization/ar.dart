@@ -60,6 +60,7 @@ Map<String, String> arLocale = {
   'profile': 'حسابي',
   'no_data': 'لا يوجد بيانات لعرضها',
   'search': 'البحث',
+  'all_categories': 'كل التصنيفات',
 
   // Profile Tab
   'my_account': 'حسابي',
