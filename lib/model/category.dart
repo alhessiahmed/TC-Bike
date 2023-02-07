@@ -11,7 +11,7 @@ class Category {
   Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    iconUrl = json['icon_url'];
+    iconUrl = json['icon_url'] ?? '';
   }
 
   // Map<String, dynamic> toJson() {
