@@ -152,9 +152,14 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      controller.productDetails!.product.name,
-                                      style: TextStyle(fontSize: 18.sp),
+                                    SizedBox(
+                                      width: Get.width * 0.6,
+                                      child: Text(
+                                        controller.productDetails!.product.name,
+                                        style: TextStyle(fontSize: 18.sp),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 3,
+                                      ),
                                     ),
                                     const Spacer(),
                                     Visibility(
@@ -199,7 +204,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                   ],
                                 ),
                                 SizedBox(height: 16.h),
-                                const Text('اللون'),
+                                Text('color'.tr),
                                 SizedBox(height: 8.h),
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -223,7 +228,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                   ),
                                 ),
                                 SizedBox(height: 16.h),
-                                const Text('الوصف'),
+                                Text('description'.tr),
                                 SizedBox(height: 8.h),
                                 Text(
                                   controller
@@ -233,6 +238,8 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                     height: 1.3,
                                     color: const Color(0xFF707070),
                                   ),
+                                  maxLines: 7,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 SizedBox(height: 20.h),
                                 // SizedBox(
@@ -294,7 +301,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                 // ),
                                 // SizedBox(height: 16.h),
                                 Text(
-                                  'منتجات موصى بها',
+                                  'recommended_products'.tr,
                                   style: TextStyle(fontSize: 16.sp),
                                 ),
                                 SizedBox(height: 16.h),
@@ -352,26 +359,37 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              // 'بدالات',
-                                              controller
-                                                  .productDetails!
-                                                  .recommendedProducts[index]
-                                                  .name,
-                                              style: TextStyle(fontSize: 12.sp),
+                                            SizedBox(
+                                              width: Get.width - 160.w,
+                                              child: Text(
+                                                // 'بدالات',
+                                                controller
+                                                    .productDetails!
+                                                    .recommendedProducts[index]
+                                                    .name,
+                                                style:
+                                                    TextStyle(fontSize: 12.sp),
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ),
                                             SizedBox(height: 8.h),
-                                            Text(
-                                              // 'بدالات مميزة',
-                                              controller
-                                                  .productDetails!
-                                                  .recommendedProducts[index]
-                                                  .description,
-                                              style: TextStyle(
-                                                fontSize: 10.sp,
-                                                color: const Color(
-                                                  0xFFA2A2A2,
+                                            SizedBox(
+                                              width: Get.width - 160.w,
+                                              child: Text(
+                                                // 'بدالات مميزة',
+                                                controller
+                                                    .productDetails!
+                                                    .recommendedProducts[index]
+                                                    .description,
+                                                style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  color: const Color(
+                                                    0xFFA2A2A2,
+                                                  ),
                                                 ),
+                                                maxLines: 5,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                             SizedBox(height: 8.h),
@@ -384,7 +402,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                             ),
                                           ],
                                         ),
-                                        const Spacer(),
+                                        // const Spacer(),
                                         IconButton(
                                           onPressed: () {
                                             _performAddToCart(

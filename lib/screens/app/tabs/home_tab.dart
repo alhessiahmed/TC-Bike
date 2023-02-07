@@ -7,6 +7,7 @@ import 'package:tcbike/core/routes/routes_manager.dart';
 import 'package:tcbike/core/widgets/no_data_widget.dart';
 import 'package:tcbike/core/widgets/shimmers/home_shimmer.dart';
 import 'package:tcbike/getx/controllers/app/category_controller.dart';
+import 'package:tcbike/getx/controllers/app/sub_category_controller.dart';
 import '../../../core/constants/colors_manager.dart';
 import '../../../core/constants/images_manager.dart';
 import '../../../core/widgets/product_card_widget.dart';
@@ -99,7 +100,11 @@ class HomeTab extends GetView<HomeController> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () async {
-                              /// TODO: FIX THIS
+                              SubCategoryController().categoryID =
+                                  controller.homeModel!.categories[index].id;
+                              SubCategoryController().categoryName =
+                                  controller.homeModel!.categories[index].name;
+                              Get.toNamed(RoutesManager.subCategoryScreen);
                               // controller.pageIndex(1);
                               // CategoryController().catIndex(index + 1);
                               // CategoryController().isLoading(true);

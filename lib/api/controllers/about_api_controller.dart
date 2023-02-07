@@ -41,7 +41,7 @@ class AboutApiController with ApiHelper {
       var jsonResponse = jsonDecode(response.body);
       data.aboutUs = jsonResponse['data']['about_us'];
       data.privacyPolicy = jsonResponse['data']['privacy_policy'];
-      data.helpCenter = jsonResponse['data']['help_center'];
+      // data.helpCenter = jsonResponse['data']['help_center'];
       data.termsConditions = jsonResponse['data']['terms_conditions'];
       return data;
     }
@@ -52,6 +52,6 @@ class AboutApiController with ApiHelper {
 class AboutData {
   late String aboutUs;
   late String privacyPolicy;
-  late String helpCenter;
+  // late String helpCenter;
   late String termsConditions;
 }
