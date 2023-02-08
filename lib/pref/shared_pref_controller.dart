@@ -40,15 +40,6 @@ class SharedPrefController {
     await _sharedPreferences.setBool(UserInfo.firstVisit.name, true);
   }
 
-  // Future<void> saveUser({required User user}) async {
-  //   await _sharedPreferences.setBool(UserInfo.isLoggedIn.name, true);
-  //   await _sharedPreferences.setInt(UserInfo.id.name, user.id);
-  //   await _sharedPreferences.setString(UserInfo.phone.name, user.phone);
-  //   await _sharedPreferences.setString(UserInfo.name.name, user.name);
-  //   await _sharedPreferences.setString(
-  //       UserInfo.token.name, 'Bearer ${user.token}');
-  // }
-
   Future<void> saveUser({
     required User user,
     String provider = 'phone',
@@ -62,6 +53,7 @@ class SharedPrefController {
     await _sharedPreferences.setString(UserInfo.email.name, email ?? '');
     await _sharedPreferences.setString(
         UserInfo.token.name, 'Bearer ${user.token}');
+    print('The provider used to login is: ${SharedPrefController().provider}');
   }
 
   Future<void> changeName({required String newName}) async {
@@ -89,6 +81,7 @@ class SharedPrefController {
     await _sharedPreferences.setString(UserInfo.image.name, '');
     await _sharedPreferences.setBool(UserInfo.rememberMe.name, false);
     await _sharedPreferences.setBool(UserInfo.firstVisit.name, false);
+    await _sharedPreferences.setString(UserInfo.provider.name, '');
   }
 
   Future<void> addToLatestSearchList(String text) async {

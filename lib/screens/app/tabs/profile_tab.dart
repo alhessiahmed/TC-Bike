@@ -219,11 +219,10 @@ class ProfileTab extends GetView<HomeController> {
   void _performLogout() async {
     controller.isLoggingOut(true);
     Get.back();
-    await SharedPrefController().logout();
     if (SharedPrefController().provider != 'phone') {
       await GoogleSignIn().disconnect().catchError((e) {});
     }
-
+    await SharedPrefController().logout();
     controller.isLoggingOut(false);
     Get.offAllNamed(RoutesManager.signInScreen);
     HomeController().pageIndex(0);

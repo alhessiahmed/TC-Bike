@@ -163,10 +163,15 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                     ),
                                     const Spacer(),
                                     Visibility(
-                                      visible: controller
+                                      visible: (controller
                                               .productDetails!.product.price !=
                                           controller.productDetails!.product
-                                              .offerPrice,
+                                              .offerPrice)
+                                      //         &&
+                                      // controller.productDetails!.product
+                                      //         .offerPrice !=
+                                      //     0
+                                      ,
                                       child: Text(
                                         '${controller.productDetails!.product.price}',
                                         // textAlign: TextAlign.center,
@@ -185,9 +190,17 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                                     ),
                                     SizedBox(width: 10.w),
                                     Text(
+                                      // controller.productDetails!.product
+                                      //             .offerPrice !=
+                                      //         0
+                                      //     ?
                                       controller
                                           .productDetails!.product.offerPrice
-                                          .toString(),
+                                          .toString()
+                                      // : controller
+                                      //     .productDetails!.product.price
+                                      //     .toString()
+                                      ,
                                       style: TextStyle(
                                         fontSize: 22.sp,
                                         fontWeight: FontWeight.bold,
