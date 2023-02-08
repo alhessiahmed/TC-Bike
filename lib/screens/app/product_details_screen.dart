@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:tcbike/core/constants/constants_manager.dart';
 import 'package:tcbike/core/extensions/color_extension.dart';
 import 'package:tcbike/core/utils/show_snackbar.dart';
 import 'package:tcbike/core/widgets/no_data_widget.dart';
@@ -143,6 +144,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                               // strokeAlign: StrokeAlign.outside,
                             ),
                             color: ColorsManager.white,
+                            boxShadow: ConstantsManager.boxShadow,
                           ),
                           child: SingleChildScrollView(
                             padding: EdgeInsets.fromLTRB(16.w, 30.w, 16.w, 200),
@@ -150,18 +152,87 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                // Row(
+                                //   children: [
+                                //     SizedBox(
+                                //       width: Get.width * 0.6,
+                                //       child: Text(
+                                //         controller.productDetails!.product.name,
+                                //         style: TextStyle(fontSize: 18.sp),
+                                //         overflow: TextOverflow.ellipsis,
+                                //         maxLines: 3,
+                                //       ),
+                                //     ),
+                                //     const Spacer(),
+                                //     Visibility(
+                                //       visible: (controller
+                                //               .productDetails!.product.price !=
+                                //           controller.productDetails!.product
+                                //               .offerPrice)
+                                //       //         &&
+                                //       // controller.productDetails!.product
+                                //       //         .offerPrice !=
+                                //       //     0
+                                //       ,
+                                //       child: Text(
+                                //         '${controller.productDetails!.product.price}',
+                                //         // textAlign: TextAlign.center,
+                                //         // textWidthBasis:
+                                //         //     TextWidthBasis.parent,
+                                //         // textScaleFactor: 1.2,
+                                //         style: TextStyle(
+                                //           fontSize: 20.sp,
+                                //           fontWeight: FontWeight.bold,
+                                //           color: ColorsManager.disabled,
+                                //           decoration:
+                                //               TextDecoration.lineThrough,
+                                //           decorationThickness: 2,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     SizedBox(width: 10.w),
+                                //     Text(
+                                //       // controller.productDetails!.product
+                                //       //             .offerPrice !=
+                                //       //         0
+                                //       //     ?
+                                //       controller
+                                //           .productDetails!.product.offerPrice
+                                //           .toString()
+                                //       // : controller
+                                //       //     .productDetails!.product.price
+                                //       //     .toString()
+                                //       ,
+                                //       style: TextStyle(
+                                //         fontSize: 22.sp,
+                                //         fontWeight: FontWeight.bold,
+                                //         color: ColorsManager.primary,
+                                //       ),
+                                //     ),
+                                //     Text(
+                                //       ' ₪',
+                                //       style: TextStyle(
+                                //         fontSize: 18.sp,
+                                //         color: ColorsManager.primary,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                                 Row(
                                   children: [
-                                    SizedBox(
-                                      width: Get.width * 0.6,
-                                      child: Text(
-                                        controller.productDetails!.product.name,
-                                        style: TextStyle(fontSize: 18.sp),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
+                                    Expanded(
+                                      child: SizedBox(
+                                        width: Get.width * 0.6,
+                                        child: Text(
+                                          controller
+                                              .productDetails!.product.name,
+                                          style: TextStyle(fontSize: 18.sp),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 3,
+                                        ),
                                       ),
                                     ),
-                                    const Spacer(),
+                                    SizedBox(width: 10.w),
                                     Visibility(
                                       visible: (controller
                                               .productDetails!.product.price !=

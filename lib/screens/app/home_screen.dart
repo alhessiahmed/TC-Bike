@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tcbike/core/constants/colors_manager.dart';
 import 'package:tcbike/core/constants/images_manager.dart';
 import 'package:tcbike/core/routes/routes_manager.dart';
+import 'package:tcbike/getx/controllers/app/cart_controller.dart';
 import 'package:tcbike/screens/app/tabs/cart_tab.dart';
 import 'package:tcbike/screens/app/tabs/categories_tab.dart';
 import 'package:tcbike/screens/app/tabs/home_tab.dart';
@@ -88,6 +89,8 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    HomeController().pageIndex(0);
+    CartController().updateCartOrders();
     return Obx(
       () => WillPopScope(
         onWillPop: () async {
