@@ -128,6 +128,7 @@ class SignInScreen extends GetView<SignInController> {
                     ),
                     obscureText: !controller.passwordVisible.value,
                     controller: controller.passwordController,
+                    textInputAction: TextInputAction.done,
                     isPassword: true,
                   ),
                 ),
