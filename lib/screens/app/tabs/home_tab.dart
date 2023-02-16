@@ -100,12 +100,18 @@ class HomeTab extends GetView<HomeController> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () async {
-                              SubCategoryController().categoryID =
+                              int id =
                                   controller.homeModel!.categories[index].id;
-                              SubCategoryController().categoryName =
-                                  controller.homeModel!.categories[index].name;
+                              SubCategoryController().categoryID(id);
+                              SubCategoryController().categoryName(
+                                  controller.homeModel!.categories[index].name);
                               Get.toNamed(RoutesManager.subCategoryScreen);
-                              // controller.pageIndex(1);
+                              SubCategoryController().isLoading(true);
+                              SubCategoryController().catIndex(0);
+                              await SubCategoryController().readSubCategories();
+                              await SubCategoryController()
+                                  .readSubCategoryProducts(id: id);
+                              SubCategoryController().isLoading(false);
                               // CategoryController().catIndex(index + 1);
                               // CategoryController().isLoading(true);
                               // await CategoryController().readCategoryProducts(

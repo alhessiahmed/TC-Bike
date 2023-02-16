@@ -16,7 +16,7 @@ class SubCategoriesScreen extends GetView<SubCategoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(controller.categoryName),
+          title: Text(controller.categoryName.value),
         ),
         body: Obx(
           () => controller.isLoading.value

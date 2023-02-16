@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
-import 'localization/app_translations.dart';
-import 'screens/app/unknown_screen.dart';
+import '../../localization/app_translations.dart';
+import '../../screens/app/unknown_screen.dart';
 import '../../pref/shared_pref_controller.dart';
 import '../../core/routes/get_pages.dart';
 import '../../core/routes/routes_manager.dart';
@@ -26,6 +27,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) {

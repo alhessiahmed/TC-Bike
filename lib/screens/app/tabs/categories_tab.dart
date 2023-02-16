@@ -46,13 +46,21 @@ class CategoriesTab extends GetView<CategoryController> {
                               ),
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  onTap: () {
-                                    SubCategoryController().categoryID =
-                                        controller.categories[index].id;
-                                    SubCategoryController().categoryName =
-                                        controller.categories[index].name;
+                                  onTap: () async {
+                                    int id = controller.categories[index].id;
+                                    print(id);
+                                    SubCategoryController().categoryID(id);
+                                    SubCategoryController().categoryName(
+                                        controller.categories[index].name);
                                     Get.toNamed(
                                         RoutesManager.subCategoryScreen);
+                                    SubCategoryController().isLoading(true);
+                                    SubCategoryController().catIndex(0);
+                                    await SubCategoryController()
+                                        .readSubCategories();
+                                    await SubCategoryController()
+                                        .readSubCategoryProducts(id: id);
+                                    SubCategoryController().isLoading(false);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
