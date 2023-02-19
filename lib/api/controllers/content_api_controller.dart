@@ -80,7 +80,7 @@ class ContentApiController with ApiHelper {
     Uri uri = Uri.parse(ApiSettings.categoryProducts);
     var response = await http.post(
       uri,
-      headers: acceptHeader,
+      headers: headers,
       body: {'category_id': id.toString()},
     );
     if (response.statusCode == 200) {
@@ -95,7 +95,7 @@ class ContentApiController with ApiHelper {
     Uri uri = Uri.parse(ApiSettings.productDetails);
     var response = await http.post(
       uri,
-      headers: {'Accept': 'application/json'},
+      headers: headers,
       body: {'product_id': '$id'},
     );
     if (response.statusCode == 200) {
@@ -143,7 +143,7 @@ class ContentApiController with ApiHelper {
     Uri uri = Uri.parse(ApiSettings.categoryProducts);
     var response = await http.post(
       uri,
-      headers: acceptHeader,
+      headers: headers,
       body: {
         'category_id': '-1',
         'search_name': text,
